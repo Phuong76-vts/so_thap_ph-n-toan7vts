@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thám tử số thập phân – Toán 7</title>
+<meta name="description" content="Học liệu tương tác Toán 7 – Bài 5: Làm quen với số thập phân vô hạn tuần hoàn. GV Ngô Thị Phương, THCS Võ Thị Sáu, Hải Phòng.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&family=Lexend:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#110e22;--panel:#1b1736;--ink:#f0ebff;--dim:#aa9fd8;--line:#3a3166;--acc:#a78bfa;--accdk:#6d4fd8;--acc2:#ff5d8f;--onacc:#160f33;--gold:#fbbf24;--gold2:#fcd34d;--goldbg:rgba(251,191,36,.12);--soft:#29234d;--note:#16122c;--inbg:#110e22;
+--okbg:rgba(34,197,94,.16);--okc:#86efac;--warnbg:rgba(251,146,60,.17);--warnc:#fdba74;--infobg:rgba(96,165,250,.16);--infoc:#c7dbff;--shadow:0 8px 28px rgba(0,0,0,.35);--certbg:linear-gradient(135deg,#fffbea,#efe8ff);--certink:#1e1647;--certacc:#6d28d9}
+body{background:radial-gradient(ellipse at 80% -20%,rgba(167,139,250,.28),transparent 55%),radial-gradient(ellipse at 0% 110%,rgba(255,93,143,.16),transparent 50%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/100% 34px,var(--bg)}
+
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'Be Vietnam Pro',system-ui,sans-serif}
+.app{max-width:1140px;margin:0 auto;padding:18px 16px 26px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{flex:0 0 66px;height:66px;border:2px solid var(--acc);border-radius:12px;display:flex;flex-direction:column;justify-content:center;padding:4px 9px;color:var(--acc);background:var(--panel)}
+.logo small{font:700 11px 'JetBrains Mono',monospace}.logo b{font:800 21px/1.1 'Lexend',sans-serif;white-space:nowrap}
+h1{margin:0;font:800 clamp(26px,5vw,46px)/1.08 'Lexend',sans-serif;letter-spacing:-.015em}
+.sub{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.08em;color:var(--dim);margin-top:5px;text-transform:uppercase}
+.hud{display:flex;gap:8px}
+.hbtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 14px;font:600 14px 'JetBrains Mono',monospace;cursor:pointer}
+.hbtn b{color:var(--gold);font-size:17px}
+.rooms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 22px}
+.rooms button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 14px;font:700 14px 'Be Vietnam Pro',sans-serif;cursor:pointer;display:flex;gap:7px;align-items:center}
+.rooms button .n{font:600 12px 'JetBrains Mono',monospace;color:var(--dim)}
+.rooms button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}.rooms button.on .n{color:inherit;opacity:.7}
+.chip{display:inline-block;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:3px 11px;background:var(--panel)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center}
+.hero h2{font:800 clamp(26px,4.3vw,42px)/1.15 'Lexend',sans-serif;margin:12px 0;letter-spacing:-.01em}
+.hero p{color:var(--dim)}
+.quote{border-left:4px solid var(--gold);padding:2px 12px;color:var(--gold2);font-size:18px;margin:12px 0}
+.hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:24px}
+.room{display:flex;gap:14px;text-align:left;cursor:pointer;color:var(--ink);font:inherit;transition:transform .15s,border-color .15s}
+.room:hover{border-color:var(--acc);transform:translateY(-2px)}
+.room .t,.tile{flex:0 0 64px;height:64px;border:2px solid var(--acc);border-radius:12px;display:flex;flex-direction:column;justify-content:center;padding:4px 8px;color:var(--acc)}
+.room .t small{font:700 11px 'JetBrains Mono',monospace}.room .t b{font:800 18px/1.1 'Lexend',sans-serif;white-space:nowrap}
+.room h3{margin:0;font:700 20px/1.25 'Lexend',sans-serif}.room p{margin:3px 0 5px;color:var(--dim);font-size:14px}
+.room .st{font:700 13px 'JetBrains Mono',monospace;color:var(--gold)}
+.rhead{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
+.coach{display:flex;gap:10px;align-items:center;flex:1 1 380px}
+.coach .av{font-size:36px;line-height:1;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.coach .say{background:var(--panel);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:8px 13px;font-size:15px;flex:1}
+.act{margin-bottom:16px}
+.act h3{margin:0 0 4px;font:700 21px/1.3 'Lexend',sans-serif;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bpill{font:700 12px 'JetBrains Mono',monospace;border:1px dashed var(--line);color:var(--dim);border-radius:999px;padding:2px 9px}
+.bpill.got{border:1px solid var(--gold);color:var(--gold2);background:var(--goldbg)}
+.dim{color:var(--dim)}.small{font-size:14px}
+.tnote{border:1px dashed var(--line);border-radius:14px;padding:10px 14px;margin-top:14px;background:var(--note);font-size:15px}
+.tnote summary{cursor:pointer;font-weight:800;color:var(--acc)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.center{justify-content:center}
+.btn{border:none;border-radius:13px;padding:11px 18px;font:800 16px 'Be Vietnam Pro',sans-serif;cursor:pointer;transition:transform .1s}
+.btn:active{transform:scale(.96)}
+.btn.main{background:var(--acc);color:var(--onacc);box-shadow:0 4px 0 var(--accdk)}
+.btn.ghost{background:var(--soft);color:var(--ink)}
+.btn.line{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:default}
+.msg{border-radius:13px;padding:10px 14px;margin-top:12px;font-size:15.5px}
+.msg.ok{background:var(--okbg);color:var(--okc)}.msg.warn{background:var(--warnbg);color:var(--warnc)}.msg.info{background:var(--infobg);color:var(--infoc)}
+.prog{height:9px;background:var(--soft);border-radius:99px;overflow:hidden;margin:10px 0 2px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0;transition:width .35s}
+.fx{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
+.fr{display:inline-flex;flex-direction:column;text-align:center;line-height:1.05;vertical-align:middle}
+.fr b{font-weight:inherit;padding:0 3px}.fr b:first-child{border-bottom:.09em solid currentColor}
+.numin{width:84px;font:800 20px 'Be Vietnam Pro',sans-serif;text-align:center;padding:8px;border:2px solid var(--line);border-radius:12px;background:var(--inbg);color:var(--ink)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:14px;padding:12px 14px;font:700 17px 'Be Vietnam Pro',sans-serif;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--acc)}
+.opt.right{border-color:#16a34a;background:var(--okbg);color:var(--okc)}.opt.wrong{border-color:#dc2626;background:var(--warnbg);color:var(--warnc)}
+.big{font:800 34px 'Be Vietnam Pro',sans-serif;color:var(--acc)}
+svg{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.pop{animation:pp .5s}@keyframes pp{40%{transform:scale(1.15)}}
+/* quiz */
+.quiz{max-width:820px;margin:0 auto}
+.qtop{display:flex;justify-content:space-between;font:700 14px 'JetBrains Mono',monospace;color:var(--dim)}
+.qbar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin:8px 0 14px}.qbar i{display:block;height:100%;background:var(--gold);transition:width 1s linear}
+.qq{font:700 22px/1.4 'Lexend',sans-serif;margin:6px 0 10px}
+.cert{text-align:center;border:4px double var(--gold);border-radius:22px;padding:26px 18px;background:var(--certbg);color:var(--certink)}
+.cert .m{font:700 13px 'JetBrains Mono',monospace;letter-spacing:.2em}
+.cert h2{font:800 30px 'Lexend',sans-serif;margin:10px 0 2px;letter-spacing:.04em}
+.cert .ct{font:800 22px 'Lexend',sans-serif;color:var(--certacc)}
+.cert .who{font:900 30px 'Be Vietnam Pro',sans-serif;border-bottom:2px dashed var(--gold);display:inline-block;min-width:240px;padding:0 12px;margin:8px 0}
+.cert input{font:700 17px 'Be Vietnam Pro',sans-serif;padding:9px 12px;border:2px solid var(--line);border-radius:12px;max-width:100%;background:#fff;color:#1b2440}
+table.info{width:100%;border-collapse:collapse;font-size:15px}
+table.info th{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-bottom:1px solid var(--line);width:28%;color:var(--acc)}
+table.info td{padding:9px 0;border-bottom:1px solid var(--line)}
+footer{text-align:center;color:var(--dim);font-size:13px;padding:6px 16px 30px}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:9998}
+#toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-200%);background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;font-weight:800;z-index:9999;transition:transform .35s;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:92vw;text-align:center}
+#toast.show{transform:translate(-50%,0)}#toast:empty{display:none}
+.hscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.swipe{display:none;text-align:center;font-size:12.5px;color:var(--dim)}
+@media(max-width:820px){.hero,.grid2{grid-template-columns:1fr}}
+@media(max-width:600px){.app{padding:14px 12px}.rooms button{padding:7px 11px;font-size:13px}.panel{padding:14px}.logo{flex-basis:56px;height:56px}.swipe{display:block}.hscroll svg{min-width:640px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.frin{display:inline-flex;flex-direction:column;align-items:center;gap:6px}.frin .fbar{width:96px;height:4px;background:var(--ink);border-radius:2px}
+.inrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:14px 0}
+.qk{display:flex;gap:6px;flex-wrap:wrap}.qk button{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:6px 12px;font:700 15px 'JetBrains Mono',monospace;cursor:pointer}
+.qk button:hover{border-color:var(--acc)}
+.steps{font:600 15.5px/1.5 'Be Vietnam Pro',sans-serif;background:var(--note);border:1px solid var(--line);border-radius:14px;padding:10px;max-height:300px;overflow:auto;min-height:120px}
+.step{padding:3px 8px;border-radius:7px;opacity:0;animation:in .25s forwards}@keyframes in{to{opacity:1}}
+.step.rep{background:rgba(255,93,143,.18);color:#ff9ab9}
+.res{font:800 clamp(26px,5vw,38px) 'JetBrains Mono',monospace;color:var(--acc);margin:10px 0 0;word-break:break-all}.res .cyc{color:var(--acc2)}
+.seg{stroke-dasharray:300;stroke-dashoffset:300;animation:dr .35s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+/* băng chuyền */
+.belt{position:relative;height:140px;border-radius:16px;overflow:hidden;background:linear-gradient(#0c0a1b,#16122e);border:1px solid var(--line);margin-top:12px}
+.belt:before{content:"";position:absolute;left:0;right:0;bottom:14px;height:22px;background:repeating-linear-gradient(90deg,#3a3166 0 18px,#251f47 18px 36px);animation:mv .9s linear infinite}
+.belt.stop:before{animation-play-state:paused}
+@keyframes mv{to{background-position:36px 0}}
+.belt .lamp{position:absolute;top:10px;right:14px;font:700 13px 'JetBrains Mono',monospace;color:var(--dim)}
+.item{position:absolute;bottom:38px;left:-140px;width:128px;height:82px;border-radius:14px;background:#fff;color:#1e1647;display:flex;align-items:center;justify-content:center;font:900 32px 'Be Vietnam Pro',sans-serif;box-shadow:0 6px 0 #c4b5fd}
+.item.ok{background:#bbf7d0;box-shadow:0 6px 0 #22c55e}.item.bad{background:#fecaca;box-shadow:0 6px 0 #ef4444}
+.bins{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.bin{flex:1 1 200px;padding:16px;font-size:18px;border-radius:16px}
+.bin.hh{background:#22c55e;color:#06240f;box-shadow:0 5px 0 #15803d}.bin.vh{background:#ff5d8f;color:#2b0614;box-shadow:0 5px 0 #be185d}
+.tip{border:1px solid var(--line);background:var(--note);border-radius:14px;padding:10px 14px;font-size:15px;margin-top:12px}
+/* két sắt */
+.safe{width:min(240px,100%);aspect-ratio:1;position:relative;margin:6px auto;perspective:700px}
+.safe .back{position:absolute;inset:0;border-radius:18px;background:#0b0918;border:6px solid #3a3166;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:60px}
+.safe .back small{font:700 16px 'JetBrains Mono',monospace;color:var(--gold)}
+.safe .door{position:absolute;inset:0;border-radius:18px;background:linear-gradient(145deg,#9094ad,#4b4f66);border:6px solid #2e3044;transform-origin:left center;transition:transform 1s cubic-bezier(.5,0,.3,1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff;font:800 15px 'JetBrains Mono',monospace}
+.safe .dial{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,#d4d4e0 0 28%,#6b6f88 29% 62%,#3b3e52 63%);border:4px solid #23253a;transition:transform .9s;display:flex;align-items:center;justify-content:center;font-size:30px}
+.safe.open .door{transform:rotateY(-108deg)}.safe.spin .dial{transform:rotate(360deg)}
+.code{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:800 30px 'JetBrains Mono',monospace;margin:14px 0}
+.code input{width:120px;font:800 26px 'JetBrains Mono',monospace;text-align:center;padding:8px;border:2px solid var(--line);border-radius:12px;background:var(--inbg);color:var(--ink)}
+.code input.pre{width:90px}
+/* làm tròn, đời sống */
+.qbig{font:800 22px/1.4 'Lexend',sans-serif;margin:10px 0}
+.case{display:flex;gap:16px;align-items:center;background:var(--note);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px}
+.case .e{font-size:54px;line-height:1}
+.ref{font-size:14.5px}.ref td{padding:3px 10px 3px 0;border-bottom:1px solid var(--line)}
+
+</style>
+</head>
+<body>
+<canvas id="cf"></canvas><div id="toast" role="status" aria-live="polite"></div>
+<div class="app">
+<header class="top">
+  <div class="brand"><div class="logo"><small>5</small><b>0,(3)</b></div><div><h1>Thám tử số thập phân</h1><div class="sub">Toán 7 · Bài 5 · Số thập phân vô hạn tuần hoàn · Học liệu tương tác và mô phỏng</div></div></div>
+  <div class="hud"><button class="hbtn" id="snd" aria-label="Bật/tắt âm thanh">🔊</button><div class="hbtn">Huy hiệu <b id="bc">0</b>/<span id="bt">0</span></div></div>
+</header>
+<nav class="rooms" id="nav" aria-label="Các phòng học"></nav>
+
+<section class="view" id="v-hub">
+  <div class="hero">
+    <div><span class="chip">Phòng chờ</span><h2>Chia 1 cho 3, máy tính hiện 0,3333333. Phép chia này có bao giờ dừng lại không?</h2>
+<div class="quote">Gợi ý: hãy theo dõi các số dư.</div>
+<p>Thám tử Chu Kì cần em phá 5 vụ án: cho máy chia chạy từng bước, phân loại trên băng chuyền, mở két sắt bằng chu kì, làm tròn số và giải các vụ án đời sống. Hoàn thành nhiệm vụ để nhận huy hiệu và giấy chứng nhận Thám tử số thập phân.</p>
+</div>
+    <div class="panel" style="text-align:center">
+<svg id="heroSvg" viewBox="0 0 500 300" aria-label="Đồng hồ số dư của phép chia 1 cho 7"></svg>
+<div id="heroCap" style="font:800 18px 'Lexend',sans-serif;min-height:28px;color:var(--ink)"></div>
+</div>
+  </div>
+  <div class="hub" id="hubRooms"></div>
+</section>
+
+<!-- R1 MÁY CHIA -->
+<section class="view" id="v-r1" hidden>
+  <div class="panel act">
+    <h3>Máy chia và đồng hồ số dư <span class="bpill" data-badge="div"></span></h3>
+    <div class="dim">Nhập một phân số rồi bấm Chia. Mỗi bước chia, số dư được đánh dấu trên đồng hồ. Khi một số dư <b>quay lại</b>, các chữ số thương lặp lại mãi mãi. Chia đủ <b>5 phân số khác nhau</b> để nhận huy hiệu.</div>
+    <div class="inrow">
+      <span class="frin"><input class="numin" id="dv-num" type="number" value="1" aria-label="Tử số"><span class="fbar"></span><input class="numin" id="dv-den" type="number" value="7" aria-label="Mẫu số"></span>
+      <button class="btn main" id="dv-go">▶ Chia</button>
+      <div><div class="dim small">Thử nhanh:</div><div class="qk" id="dv-quick"><button data-f="1/3">1/3</button><button data-f="3/8">3/8</button><button data-f="5/6">5/6</button><button data-f="2/11">2/11</button><button data-f="7/12">7/12</button><button data-f="3/7">3/7</button></div></div>
+    </div>
+    <div class="grid2">
+      <div><div class="steps" id="dv-steps"><span class="dim">Các bước chia sẽ hiện ở đây.</span></div><div class="res" id="dv-res"></div></div>
+      <div><svg id="dv-clock" viewBox="0 0 260 260" aria-label="Đồng hồ số dư"></svg><div class="dim small" style="text-align:center">Đồng hồ số dư: các điểm là những số dư có thể có (0, 1, …, mẫu − 1). <span style="color:#ff9ab9">Đường hồng</span> là vòng lặp.</div></div>
+    </div>
+    <div id="dv-f"></div><div class="dim small" id="dv-tried"></div>
+  </div>
+  <div class="panel act">
+    <h3>Suy luận của thám tử: vì sao chắc chắn phải lặp? <span class="bpill" data-badge="why"></span></h3>
+    <div class="prog"><i id="wy-p"></i></div><div class="dim small" id="wy-c"></div>
+    <div class="qbig" id="wy-q"></div><div class="opts" id="wy-o"></div><div id="wy-f"></div>
+    <div class="row"><button class="btn ghost" id="wy-nx">Câu tiếp ➜</button></div>
+  </div>
+  <details class="tnote"><summary>Gợi ý cho giáo viên</summary>Dùng ở mục 1. Số thập phân hữu hạn và số thập phân vô hạn tuần hoàn. Cho học sinh tự chia 1 : 3 và 1 : 7 trên giấy trước, sau đó dùng máy chia để đối chiếu. Đồng hồ số dư giúp học sinh "nhìn thấy" lí do lặp: khi chia cho b, số dư chỉ có thể là 0, 1, …, b − 1; nếu chưa gặp số dư 0 thì sau nhiều nhất b − 1 bước, một số dư phải xuất hiện lại. Phần suy luận dành cho học sinh khá, giỏi hoặc dùng để thảo luận cả lớp.</details>
+</section>
+
+<!-- R2 BĂNG CHUYỀN -->
+<section class="view" id="v-r2" hidden>
+  <div class="panel act">
+    <h3>Băng chuyền phân loại <span class="bpill" data-badge="belt"></span></h3>
+    <div class="dim">Phân số chạy trên băng chuyền. Bấm thùng đúng trước khi phân số rơi khỏi băng: <b>Hữu hạn</b> hay <b>Vô hạn tuần hoàn</b>? Băng chạy nhanh dần! Đúng 8/10 để nhận huy hiệu.</div>
+    <div class="prog"><i id="bl-p"></i></div><div class="dim small" id="bl-c"></div>
+    <div class="belt stop" id="bl-belt"><span class="lamp" id="bl-lamp">● TẮT</span><div class="item" id="bl-item">?</div></div>
+    <div class="bins"><button class="btn bin hh" id="bl-hh">📦 Hữu hạn</button><button class="btn bin vh" id="bl-vh">♾️ Vô hạn tuần hoàn</button></div>
+    <div class="row center"><button class="btn main" id="bl-go">▶ Bật băng chuyền</button></div>
+    <div id="bl-f"></div>
+    <div class="tip">🕵️ <b>Mẹo thám tử:</b> rút gọn phân số (mẫu dương), rồi phân tích mẫu ra thừa số nguyên tố. Mẫu chỉ có ước nguyên tố <b>2 và 5</b> → số thập phân hữu hạn; có ước nguyên tố khác 2 và 5 → số thập phân vô hạn tuần hoàn. Không chắc thì sang phòng 01 chia thử!</div>
+  </div>
+  <details class="tnote"><summary>Gợi ý cho giáo viên</summary>Dùng sau khi học sinh đã chia thử ở phòng 01, nhằm củng cố nhận biết số thập phân hữu hạn và vô hạn tuần hoàn. Dấu hiệu dựa vào mẫu số là kiến thức mở rộng giúp dự đoán nhanh, không bắt buộc ghi nhớ; học sinh luôn có thể kiểm tra bằng phép chia. Chú ý các phân số chưa tối giản như 9/12, 6/75, 7/14: phải rút gọn trước khi xét mẫu. Có thể chiếu lên bảng và chia lớp thành hai đội thi đua.</details>
+</section>
+
+<!-- R3 KÉT SẮT -->
+<section class="view" id="v-r3" hidden>
+  <div class="panel act">
+    <h3>Két sắt chu kì <span class="bpill" data-badge="safe"></span></h3>
+    <div class="dim">Mỗi két sắt khoá bằng một phân số. Viết phân số dưới dạng số thập phân vô hạn tuần hoàn: ô thứ nhất là phần <b>không lặp</b> sau dấu phẩy (để trống nếu không có), ô trong ngoặc là <b>chu kì</b>. Mở đúng ngay lần đầu 4/6 két để nhận huy hiệu.</div>
+    <div class="prog"><i id="sf-p"></i></div><div class="dim small" id="sf-c"></div>
+    <div class="grid2">
+      <div class="safe" id="sf-safe"><div class="back"><span>💎</span><small id="sf-code"></small></div><div class="door"><div class="dial" id="sf-lock">🔒</div><span>KÉT SỐ <span id="sf-no">1</span></span></div></div>
+      <div><div class="code"><span id="sf-q"></span><span>= 0,</span><input class="pre" id="sf-pre" inputmode="numeric" maxlength="4" aria-label="Phần không lặp" placeholder="…"><span>(</span><input id="sf-cyc" inputmode="numeric" maxlength="8" aria-label="Chu kì" placeholder="chu kì"><span>)</span></div>
+        <div class="row"><button class="btn main" id="sf-ok">🔑 Mở két</button><button class="btn ghost" id="sf-nx">Két tiếp ➜</button></div>
+        <div id="sf-f"></div></div>
+    </div>
+  </div>
+  <details class="tnote"><summary>Gợi ý cho giáo viên</summary>Dùng ở phần cách viết gọn số thập phân vô hạn tuần hoàn, ví dụ 0,333… = 0,(3); 0,1666… = 0,1(6). Nhấn mạnh: chu kì là nhóm chữ số <b>ngắn nhất</b> lặp lại liên tiếp, đặt trong dấu ngoặc tròn. Học liệu nhận ra cả trường hợp học sinh viết đúng giá trị nhưng chưa gọn (ví dụ 0,(33) hoặc 0,(16)6) và nhắc học sinh viết lại cho chuẩn.</details>
+</section>
+
+<!-- R4 LÀM TRÒN -->
+<section class="view" id="v-r4" hidden>
+  <div class="panel act">
+    <h3>Làm tròn trên trục số <span class="bpill" data-badge="round"></span></h3>
+    <div class="dim">Phóng to trục số để thấy số cần làm tròn nằm gần số nào hơn. Chọn kết quả làm tròn đúng. Đúng ngay 5/6 câu để nhận huy hiệu.</div>
+    <div class="prog"><i id="rd-p"></i></div><div class="dim small" id="rd-c"></div>
+    <div class="qbig" id="rd-q"></div>
+    <svg id="rd-svg" viewBox="0 0 820 170" aria-label="Trục số phóng to"></svg>
+    <div class="row center"><button class="btn line" id="rd-a" style="font-size:22px;min-width:150px"></button><button class="btn line" id="rd-b" style="font-size:22px;min-width:150px"></button></div>
+    <div id="rd-f"></div><div class="row"><button class="btn ghost" id="rd-nx">Câu tiếp ➜</button></div>
+  </div>
+  <div class="panel act">
+    <h3>Làm tròn với độ chính xác cho trước <span class="bpill" data-badge="prec"></span></h3>
+    <div class="dim">Bước 1: từ độ chính xác, chọn hàng cần làm tròn. Bước 2: chọn kết quả. Đúng cả hai bước ngay lần đầu ở 4/5 câu để nhận huy hiệu.</div>
+    <details class="tip"><summary style="cursor:pointer;font-weight:800">📒 Sổ tay thám tử</summary>
+      <table class="ref"><tr><td>Làm tròn đến hàng trăm</td><td>độ chính xác 50</td></tr><tr><td>Làm tròn đến hàng chục</td><td>độ chính xác 5</td></tr><tr><td>Làm tròn đến hàng đơn vị</td><td>độ chính xác 0,5</td></tr><tr><td>Làm tròn đến hàng phần mười</td><td>độ chính xác 0,05</td></tr><tr><td>Làm tròn đến hàng phần trăm</td><td>độ chính xác 0,005</td></tr></table>
+      <div class="small dim" style="margin-top:6px">Độ chính xác bằng một nửa đơn vị của hàng làm tròn.</div></details>
+    <div class="prog"><i id="pc-p"></i></div><div class="dim small" id="pc-c"></div>
+    <div class="qbig" id="pc-q"></div>
+    <div class="dim small">Bước 1 · Làm tròn đến hàng nào?</div><div class="opts" id="pc-o1"></div>
+    <div id="pc-s2" hidden><div class="dim small" style="margin-top:12px">Bước 2 · Kết quả làm tròn là:</div><div class="opts" id="pc-o2"></div></div>
+    <div id="pc-f"></div><div class="row"><button class="btn ghost" id="pc-nx">Câu tiếp ➜</button></div>
+  </div>
+  <details class="tnote"><summary>Gợi ý cho giáo viên</summary>Dùng ở mục 2. Làm tròn số thập phân căn cứ vào độ chính xác cho trước. Quy tắc làm tròn: nếu chữ số đầu tiên bị bỏ đi nhỏ hơn 5 thì giữ nguyên bộ phận còn lại; nếu lớn hơn hoặc bằng 5 thì cộng thêm 1 vào chữ số cuối cùng của bộ phận còn lại. Trục số phóng to giúp học sinh hiểu vì sao: số cần làm tròn nằm gần mốc nào hơn (điểm giữa ứng với chữ số 5). Với độ chính xác d, chọn hàng làm tròn có đơn vị gấp đôi d (0,005 → hàng phần trăm).</details>
+</section>
+
+<!-- R5 ĐỜI SỐNG -->
+<section class="view" id="v-r5" hidden>
+  <div class="panel act">
+    <h3>Vụ án đời sống <span class="bpill" data-badge="life"></span></h3>
+    <div class="dim">Những phép chia "không bao giờ hết" xuất hiện cả trong cuộc sống. Giải 5 vụ án, đúng 4/5 để nhận huy hiệu.</div>
+    <div class="prog"><i id="lf-p"></i></div><div class="dim small" id="lf-c"></div>
+    <div class="case"><div class="e" id="lf-e"></div><div class="qbig" id="lf-q" style="margin:0"></div></div>
+    <div class="opts" id="lf-o"></div><div id="lf-f"></div>
+    <div class="row"><button class="btn ghost" id="lf-nx">Vụ tiếp ➜</button></div>
+  </div>
+  <details class="tnote"><summary>Gợi ý cho giáo viên</summary>Dùng ở phần Vận dụng. Mỗi vụ án là một phép chia ra số thập phân vô hạn tuần hoàn, cần làm tròn theo yêu cầu thực tế. Có thể mở rộng: vì sao khi chia 100 000 đồng cho 3 người, ngân hàng hay cửa hàng phải làm tròn? Học sinh tự đặt một "vụ án" từ cuộc sống gia đình mình và đố bạn.</details>
+</section>
+
+
+<section class="view" id="v-r6" hidden>
+  <div class="quiz" id="quiz"></div>
+  <details class="tnote" style="max-width:820px;margin:14px auto 0"><summary>Gợi ý cho giáo viên</summary>Dùng ở phần Luyện tập hoặc củng cố cuối tiết, mỗi câu 30 giây. Đạt từ 6/8 câu nhận giấy chứng nhận Thám tử số thập phân. Có thể giao về nhà: học sinh chụp giấy chứng nhận nộp qua nhóm lớp.</details>
+</section>
+
+<section class="view" id="v-info" hidden>
+  <div class="panel" style="max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+    <span class="chip" style="align-self:flex-start">Thông tin học liệu (theo Công văn 5158/SGDĐT-GDTrH)</span>
+    <h2 style="font:800 28px 'Lexend',sans-serif;margin:0">Thám tử số thập phân – Học liệu tương tác và mô phỏng</h2>
+    <div style="overflow-x:auto"><table class="info" id="infoT"></table></div>
+  </div>
+</section>
+</div>
+<footer>Học liệu số Toán 7 · GV Ngô Thị Phương – Trường THCS Võ Thị Sáu, phường An Biên, Hải Phòng · Giáo viên đồng sáng tạo cùng AI</footer>
+<script>
+/* ====== KHUNG CHUNG (dùng cho các học liệu Toán 7) ====== */
+const $=id=>document.getElementById(id),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function simp(f){const g=gcd(f.n,f.d);let n=f.n/g,d=f.d/g;if(d<0){n=-n;d=-d}return{n,d}}
+function parse(s){s=String(s).replace(/−/g,'-').replace(',','.').trim();
+  if(s.includes(' ')){const[w,fr]=s.split(' ');const[a,b]=fr.split('/').map(Number),W=Number(w);return simp({n:(Math.abs(W)*b+a)*(W<0?-1:1),d:b})}
+  if(s.includes('/')){const[a,b]=s.split('/').map(Number);return{n:a,d:b}}
+  const p=s.split('.');if(p.length===1)return{n:Number(s),d:1};
+  const d=Math.pow(10,p[1].length);return simp({n:Math.round(Number(s)*d),d})}
+function val(s){const f=parse(s);return f.n/f.d}
+function pretty(s){return String(s).replace(/-/g,'−')}
+function F(s){s=String(s);const neg=s[0]==='-',b=neg?s.slice(1):s;
+  if(b.includes(' ')){const[w,fr]=b.split(' ');const[n,d]=fr.split('/');return `<span class="fx">${neg?'−':''}${w}<span class="fr"><b>${n}</b><b>${d}</b></span></span>`}
+  if(b.includes('/')){const[n,d]=b.split('/');return `<span class="fx">${neg?'−':''}<span class="fr"><b>${n}</b><b>${d}</b></span></span>`}
+  return (neg?'−':'')+b}
+function fs(n,d){return (n<0?'−':'')+Math.abs(n)+(d===1?'':'/'+d)}
+function factors(n){const f=[];let d=2;n=Math.abs(n);while(n>1){while(n%d===0){f.push(d);n/=d}d++}return f}
+function decimal(a,b){const sign=(a<0)!==(b<0)&&a!==0?'-':'';a=Math.abs(a);b=Math.abs(b);
+  const int=Math.floor(a/b);let r=a%b;const seen={},digits=[],steps=[];let cs=-1;
+  while(r!==0&&digits.length<260){if(seen[r]!==undefined){cs=seen[r];break}seen[r]=digits.length;const q=Math.floor(r*10/b),nr=(r*10)%b;steps.push({r,q,nr});digits.push(q);r=nr}
+  const pre=cs<0?digits.join(''):digits.slice(0,cs).join(''),cyc=cs<0?'':digits.slice(cs).join('');
+  return{sign,int,pre,cyc,steps,repR:r}}
+function fmtD(d){return (d.sign?'−':'')+d.int+(d.pre||d.cyc?','+d.pre+(d.cyc?'('+d.cyc+')':''):'')}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* âm thanh */
+let AC=null,soundOn=true;try{soundOn=localStorage.getItem('vts-snd')!=='0'}catch(e){}
+function beep(f,d,type,v,w){if(!soundOn)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+  const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+(w||0);o.type=type||'sine';o.frequency.value=f;
+  g.gain.setValueAtTime(v||.08,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.03)}catch(e){}}
+const sfx={ok(){beep(660,.14);beep(990,.22,'sine',.08,.11)},bad(){beep(190,.28,'square',.035)},tap(){beep(540,.07,'triangle',.06)},
+  flip(){beep(420,.05,'triangle',.04)},tick(){beep(880,.03,'square',.02)},win(){[523,659,784,1047].forEach((f,i)=>beep(f,.3,'sine',.08,i*.13))}};
+
+/* pháo giấy + thông báo */
+let cv,cx,parts=[],raf=0;
+function confetti(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;cv=cv||$('cf');cx=cx||cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+  const cols=['#fbbf24','#f43f5e','#3b82f6','#22c55e','#ec4899','#14b8a6','#a78bfa'];
+  for(let i=0;i<(n||70);i++)parts.push({x:innerWidth/2+(Math.random()-.5)*240,y:innerHeight*.35,vx:(Math.random()-.5)*13,vy:-Math.random()*12-4,r:Math.random()*6+4,c:cols[i%7],a:Math.random()*6,l:95});
+  if(!raf)tick()}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.45;p.a+=.2;p.l--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);cx.restore()});
+  parts=parts.filter(p=>p.l>0&&p.y<cv.height+20);raf=parts.length?requestAnimationFrame(tick):(cx.clearRect(0,0,cv.width,cv.height),0)}
+let toastT=0;function toast(t){const e=$('toast');e.innerHTML=t;e.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('show'),2600)}
+
+/* trạng thái, huy hiệu */
+const ST={b:{},name:''};
+function loadST(){try{const o=JSON.parse(localStorage.getItem(L.key)||'{}');ST.b=o.b||{};ST.name=o.name||''}catch(e){}}
+function saveST(){try{localStorage.setItem(L.key,JSON.stringify(ST))}catch(e){}}
+function award(k){if(ST.b[k])return false;ST.b[k]=1;saveST();sfx.win();confetti(110);toast('🏅 Huy hiệu mới: '+L.badges[k]);counts();return true}
+function counts(){const n=Object.keys(L.badges).filter(k=>ST.b[k]).length;$('bc').textContent=n;$('bt').textContent=Object.keys(L.badges).length;
+  $$('.bpill').forEach(p=>{const k=p.dataset.badge;p.classList.toggle('got',!!ST.b[k]);p.textContent=(ST.b[k]?'🏅 ':'○ ')+L.badges[k]});
+  $$('#hubRooms .room').forEach(b=>{const r=L.rooms.find(x=>x[0]===b.dataset.go);b.querySelector('.st').textContent='★ '+r[5].filter(k=>ST.b[k]).length+'/'+r[5].length})}
+function say(t){const v=$$('.view').find(x=>!x.hidden);const s=v&&v.querySelector('.say');if(s)s.innerHTML='<b>'+L.coach+':</b> '+t}
+function msg(id,t,cls){$(id).innerHTML=t?`<div class="msg ${cls||'info'}">${t}</div>`:''}
+function prog(p,i,n,s){$(p+'-p').style.width=(i/n*100)+'%';$(p+'-c').textContent='Câu '+Math.min(i+1,n)+'/'+n+' · Đúng ngay lần đầu: '+s}
+const STOP=[];function stopAll(){STOP.forEach(f=>{try{f()}catch(e){}})}
+function go(v){if(!$('v-'+v))v='hub';stopAll();$$('.view').forEach(x=>x.hidden=x.id!=='v-'+v);$$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===v));
+  if(L.intro&&L.intro[v])say(L.intro[v]);if(v===L.quizRoom)qIntro();if(L.onEnter)L.onEnter(v);
+  try{history.replaceState(null,'','#'+v)}catch(e){}window.scrollTo(0,0)}
+
+/* thử thách tính giờ + giấy chứng nhận */
+let qi=0,qs=0,qt=null,tl=30,qLock=false,QS=[];
+STOP.push(()=>clearInterval(qt));
+function qIntro(){clearInterval(qt);$('quiz').innerHTML=`<div class="panel" style="text-align:center"><span class="chip">${L.quiz.length} câu · mỗi câu 30 giây</span>
+  <h2 style="font:800 30px 'Lexend',sans-serif;margin:12px 0 6px">${L.quizTitle}</h2><p class="dim">Đúng từ ${L.quizPass}/${L.quiz.length} câu trở lên để nhận giấy chứng nhận <b>${L.certTitle}</b>.</p>
+  <div class="row center"><input id="qName" class="numin" style="width:280px;font-size:17px;text-align:left" maxlength="40" placeholder="Tên và lớp của em" value="${(ST.name||'').replace(/"/g,'&quot;')}"></div>
+  <div class="row center"><button class="btn main" id="qGo">▶ Bắt đầu thử thách</button></div><p class="dim small">Tên chỉ lưu trên máy của em, không gửi đi đâu.</p></div>`;
+  $('qGo').onclick=()=>{ST.name=$('qName').value.trim();saveST();QS=L.quiz.map(q=>({...q,ord:shuffle(q.o.map((t,i)=>i))}));qi=0;qs=0;qRender()}}
+function qRender(){clearInterval(qt);const el=$('quiz');
+  if(qi>=QS.length){const pass=qs>=L.quizPass;if(pass)award('quiz');
+    const n=Object.keys(L.badges).filter(k=>ST.b[k]).length,N=Object.keys(L.badges).length;
+    el.innerHTML=pass?`<div class="cert"><div class="m">${L.certTop}</div><h2>GIẤY CHỨNG NHẬN</h2><div class="ct">${L.certTitle}</div><div style="margin-top:10px">Trao cho</div>
+      <div class="who" id="certWho">${ST.name||'. . . . . . . .'}</div><div>đã hoàn thành ${L.certWhat} với <b>${qs}/${QS.length}</b> câu đúng và đạt <b>${n}/${N}</b> huy hiệu.</div>
+      <div class="small" style="margin-top:6px;opacity:.8">Ngày ${new Date().toLocaleDateString('vi-VN')} · GV hướng dẫn: Ngô Thị Phương – Trường THCS Võ Thị Sáu, Hải Phòng</div>
+      <div class="row center"><input id="cName" maxlength="40" placeholder="Sửa tên của em" value="${(ST.name||'').replace(/"/g,'&quot;')}"></div>
+      <div class="small" style="margin-top:6px">📸 Chụp màn hình giấy chứng nhận gửi cô nhé!</div></div><div class="row center"><button class="btn ghost" id="qAgain">↻ Làm lại thử thách</button></div>`
+     :`<div class="panel" style="text-align:center"><h2 style="font:800 30px 'Lexend',sans-serif">${qs}/${QS.length} câu đúng</h2><p>Cần ${L.quizPass}/${QS.length} câu để nhận giấy chứng nhận. Em ôn lại các phòng rồi thử lại nhé!</p><div class="row center"><button class="btn main" id="qAgain">↻ Làm lại</button></div></div>`;
+    if(pass){confetti(160);$('cName').oninput=e=>{ST.name=e.target.value.trim();saveST();$('certWho').textContent=ST.name||'. . . . . . . .'}}
+    $('qAgain').onclick=()=>{QS=L.quiz.map(q=>({...q,ord:shuffle(q.o.map((t,i)=>i))}));qi=0;qs=0;qRender()};return}
+  const q=QS[qi];tl=30;qLock=false;
+  el.innerHTML=`<div class="panel"><div class="qtop"><span>Câu ${qi+1}/${QS.length}</span><span>Đúng: ${qs}</span><span id="qTime">⏱ 30 giây</span></div><div class="qbar"><i id="qBar" style="width:100%"></i></div>
+    <div class="qq">${q.q}</div><div class="opts" id="qOpts">${q.ord.map(i=>`<button class="opt" data-i="${i}">${q.o[i]}</button>`).join('')}</div><div id="qFb"></div>
+    <div class="row"><button class="btn main" id="qNext" hidden>Câu tiếp ➜</button></div></div>`;
+  $$('#qOpts .opt').forEach(b=>b.onclick=()=>qAns(+b.dataset.i));$('qNext').onclick=()=>{qi++;qRender()};
+  qt=setInterval(()=>{tl--;$('qTime').textContent='⏱ '+tl+' giây';$('qBar').style.width=(tl/30*100)+'%';if(tl<=5&&tl>0)sfx.tick();if(tl<=0)qAns(-1)},1000)}
+function qAns(i){if(qLock)return;qLock=true;clearInterval(qt);const q=QS[qi],ok=i===q.a;if(ok){qs++;sfx.ok()}else sfx.bad();
+  $$('#qOpts .opt').forEach(b=>{const k=+b.dataset.i;if(k===q.a)b.classList.add('right');else if(k===i)b.classList.add('wrong');b.disabled=true});
+  msg('qFb',(i<0?'⏰ Hết giờ! ':ok?'✅ Chính xác! ':'💭 Chưa đúng. ')+(q.e||''),ok?'ok':'warn');$('qNext').hidden=false;$('qNext').textContent=qi<QS.length-1?'Câu tiếp ➜':'Xem kết quả ➜'}
+
+/* khởi động */
+function boot(){loadST();
+  $('snd').textContent=soundOn?'🔊':'🔇';$('snd').onclick=()=>{soundOn=!soundOn;$('snd').textContent=soundOn?'🔊':'🔇';try{localStorage.setItem('vts-snd',soundOn?'1':'0')}catch(e){}};
+  $('nav').innerHTML=[['hub','00','Phòng chờ'],...L.rooms.map(r=>[r[0],r[3],r[1]]),['info','ⓘ','Thông tin học liệu']].map(r=>`<button data-go="${r[0]}"><span class="n">${r[1]}</span>${r[2]}</button>`).join('');
+  $$('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  $('hubRooms').innerHTML=L.rooms.map(r=>`<button class="panel room" data-go="${r[0]}"><span class="t"><small>${r[3]}</small><b>${r[4]}</b></span><span><h3>${r[1]}</h3><p>${r[2]}</p><span class="st"></span></span></button>`).join('');
+  $$('#hubRooms .room').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  L.rooms.forEach(r=>{const s=$('v-'+r[0]);if(s)s.insertAdjacentHTML('afterbegin',`<div class="rhead"><span class="chip">Phòng ${r[3]} · ${r[1]}</span><div class="coach"><span class="av">${L.avatar}</span><div class="say"></div></div></div>`)});
+  $('infoT').innerHTML=L.info.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('');
+  counts();if(L.hero)L.hero();
+  const h=location.hash.slice(1);go($('v-'+h)?h:'hub')}
+
+/* ====== BÀI 5: THÁM TỬ SỐ THẬP PHÂN ====== */
+const L={key:'vts-toan7-b5',coach:'Thám tử Chu Kì',avatar:'🕵️',
+ rooms:[['r1','Máy chia & đồng hồ số dư','Cho phép chia chạy từng bước, nhìn số dư quay vòng; suy luận vì sao chắc chắn phải lặp.','01','÷',['div','why']],
+  ['r2','Băng chuyền phân loại','Phân số chạy trên băng chuyền: hữu hạn hay vô hạn tuần hoàn? Nhanh tay lên!','02','HH·VH',['belt']],
+  ['r3','Két sắt chu kì','Viết gọn số thập phân vô hạn tuần hoàn để mở két sắt.','03','( )',['safe']],
+  ['r4','Phòng làm tròn','Làm tròn trên trục số phóng to; làm tròn với độ chính xác cho trước.','04','≈',['round','prec']],
+  ['r5','Vụ án đời sống','Chia tiền, cắt ruy băng, chia kẹo… và làm tròn cho hợp lí.','05','₫',['life']],
+  ['r6','Thử thách & chứng nhận','8 câu hỏi tính giờ, nhận giấy chứng nhận Thám tử số thập phân.','06','★',['quiz']]],
+ badges:{div:'Thợ máy chia',why:'Nhà suy luận',belt:'Tay nhanh mắt tinh',safe:'Phá khoá chu kì',round:'Làm tròn chuẩn',prec:'Bậc thầy độ chính xác',life:'Thám tử đời sống',quiz:'Thám tử số thập phân'},
+ quizRoom:'r6',quizPass:6,quizTitle:'Thử thách Thám tử số thập phân',certTitle:'Thám tử số thập phân',certTop:'THÁM TỬ SỐ THẬP PHÂN · TOÁN 7 · BÀI 5',certWhat:'thử thách về số thập phân vô hạn tuần hoàn và làm tròn số',
+ intro:{r1:'Chào em! Mình là Thám tử Chu Kì. Manh mối quan trọng nhất của mọi phép chia là <b>số dư</b>. Theo dõi chúng nhé!',
+  r2:'Băng chuyền sắp chạy! Rút gọn phân số rồi nhìn <b>mẫu số</b>: chỉ có ước 2 và 5 thì là số thập phân hữu hạn.',
+  r3:'Mật mã của két sắt chính là <b>chu kì</b>, nhóm chữ số ngắn nhất lặp lại. Chia cẩn thận nhé!',
+  r4:'Chữ số đầu tiên bị bỏ đi <b>nhỏ hơn 5</b> thì giữ nguyên, <b>từ 5 trở lên</b> thì cộng thêm 1.',
+  r5:'Vụ án hôm nay xảy ra ngay trong đời sống. Chia xong nhớ làm tròn đúng yêu cầu nhé!',
+  r6:'Thử thách cuối cùng! 8 câu, mỗi câu 30 giây. Bình tĩnh như một thám tử thật!'},
+ quiz:[
+  {q:'Phân số nào viết được dưới dạng số thập phân hữu hạn?',o:[F('3/8'),F('1/3'),F('2/7'),F('5/6')],a:0,e:'3/8 = 0,375; mẫu 8 = 2·2·2 chỉ có ước nguyên tố 2.'},
+  {q:F('1/3')+' viết dưới dạng số thập phân là:',o:['0,(3)','0,3','0,(03)','3,(0)'],a:0,e:'1 : 3 = 0,333… = 0,(3).'},
+  {q:'Chu kì của số 0,4(15) là:',o:['15','4','415','41'],a:0,e:'Nhóm chữ số trong ngoặc là chu kì: 15.'},
+  {q:'Số 0,1666… viết gọn là:',o:['0,1(6)','0,(16)','0,(1)6','0,16'],a:0,e:'Chỉ chữ số 6 lặp lại, chữ số 1 không lặp: 0,1(6).'},
+  {q:'Làm tròn số 2,6578 đến hàng phần trăm được:',o:['2,66','2,65','2,6','2,658'],a:0,e:'Chữ số đầu tiên bị bỏ đi là 7 ≥ 5 nên cộng 1: 2,66.'},
+  {q:'Làm tròn số 0,(36) với độ chính xác 0,05 được:',o:['0,4','0,3','0,36','0,37'],a:0,e:'Độ chính xác 0,05 → làm tròn đến hàng phần mười; 0,3636… ≈ 0,4.'},
+  {q:'Phân số '+F('7/20')+' bằng:',o:['0,35','0,(35)','0,3(5)','3,5'],a:0,e:'7/20 = 35/100 = 0,35 (mẫu 20 = 2·2·5).'},
+  {q:'Một sợi dây dài 2 m cắt thành 3 đoạn bằng nhau. Mỗi đoạn dài khoảng (làm tròn đến hàng phần trăm):',o:['0,67 m','0,66 m','0,6 m','0,7 m'],a:0,e:'2 : 3 = 0,(6) = 0,666… ≈ 0,67 m.'}],
+ info:[['Tên học liệu','Thám tử số thập phân'],['Loại học liệu','Học liệu tương tác và mô phỏng (mục II.2.3)'],['Môn học, lớp','Toán 7 – bộ sách Kết nối tri thức với cuộc sống'],['Bài học','Chương II. Bài 5. Làm quen với số thập phân vô hạn tuần hoàn'],
+  ['Yêu cầu cần đạt','Nhận biết được số thập phân hữu hạn và số thập phân vô hạn tuần hoàn. Vận dụng được quy tắc làm tròn số căn cứ vào độ chính xác cho trước.'],
+  ['Mục đích, đối tượng','Giáo viên dùng trong hoạt động khám phá, luyện tập, vận dụng; học sinh lớp 7 tự học, tự kiểm tra. Dùng được trong dạy học trực tiếp, trực tuyến, kết hợp.'],
+  ['Hướng dẫn khai thác','Chọn phòng trên thanh điều hướng. Mỗi phòng có mục "Gợi ý cho giáo viên". Nút 🤖 mở trợ giảng AI chỉ gợi ý, không cho đáp án. Chạy trên trình duyệt (máy tính, điện thoại, máy tính bảng), không cần cài đặt, không cần đăng nhập; trợ giảng AI cần kết nối Internet.'],
+  ['Tác giả','Ngô Thị Phương – Tổ Khoa học tự nhiên, Trường THCS Võ Thị Sáu, phường An Biên, thành phố Hải Phòng'],
+  ['Nguồn tài liệu','SGK Toán 7 tập một (Kết nối tri thức với cuộc sống), Bài 5: số thập phân hữu hạn, số thập phân vô hạn tuần hoàn, chu kì, làm tròn số căn cứ vào độ chính xác cho trước. Các tình huống đời sống do tác giả xây dựng.'],
+  ['Bản quyền','Hình vẽ, mô phỏng, âm thanh do tác giả tạo bằng mã; không dùng tài nguyên của bên thứ ba. Phông chữ Lexend, Be Vietnam Pro, JetBrains Mono (giấy phép SIL OFL). Cho phép sử dụng, chỉnh sửa cho mục đích giáo dục, ghi rõ nguồn.'],
+  ['Sử dụng trí tuệ nhân tạo','Có dùng trợ lý AI Claude (Anthropic) hỗ trợ thiết kế, viết mã; trợ giảng AI dùng Gemini (Google) với lời nhắc sư phạm do tác giả soạn. Tác giả đã kiểm tra, xác minh nội dung và chịu trách nhiệm về tính chính xác.'],
+  ['An toàn thông tin','Không thu thập, không gửi dữ liệu cá nhân; tên trên giấy chứng nhận và huy hiệu chỉ lưu trên thiết bị của người dùng.'],['Phiên bản','1.0 – tháng 10/2026']],
+ hero:heroB5};
+const num=(x,dec)=>x.toFixed(dec).replace('.',',');
+
+/* đồng hồ số dư */
+function clockSVG(seq,b,cycFrom,o){o=o||{};const C=o.c||130,R=o.r||100,P=r=>({x:C+R*Math.sin(2*Math.PI*r/b),y:C-R*Math.cos(2*Math.PI*r/b)});
+  let h=`<circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="#3a3166" stroke-width="2"/>`;
+  for(let r=0;r<b;r++){const p=P(r);h+=`<circle cx="${p.x}" cy="${p.y}" r="${b>20?3:5}" fill="${r===0?'#22c55e':'#6d5bb8'}"/>`;
+    if(b<=20){const q={x:C+(R+16)*Math.sin(2*Math.PI*r/b),y:C-(R+16)*Math.cos(2*Math.PI*r/b)};h+=`<text x="${q.x}" y="${q.y+5}" text-anchor="middle" font-size="13" font-weight="700" fill="${r===0?'#86efac':'#c4b5fd'}">${r}</text>`}}
+  for(let i=0;i+1<seq.length;i++){const a=P(seq[i]),c=P(seq[i+1]),cy=cycFrom>=0&&i>=cycFrom;
+    h+=`<line class="${o.anim===false?'':'seg'}" x1="${a.x}" y1="${a.y}" x2="${c.x}" y2="${c.y}" stroke="${cy?'#ff5d8f':'#a78bfa'}" stroke-width="3" style="animation-delay:${o.anim===false?0:i*0.14}s"/>`}
+  if(seq.length){const s=P(seq[0]);h+=`<circle cx="${s.x}" cy="${s.y}" r="8" fill="none" stroke="#fbbf24" stroke-width="3"/>`}
+  return h}
+
+/* ---------- PHÒNG CHỜ: 1 : 7 ---------- */
+function heroB5(){const seq=[1,3,2,6,4,5,1],dg='142857';let k=0;
+  function draw(){const s=seq.slice(0,k+1),done=k>=6;let h=clockSVG(s,7,done?0:-1,{c:140,r:100,anim:false});
+    h=`<g transform="translate(0,10)">${h}</g><text x="300" y="70" font-size="22" font-weight="800" fill="#f0ebff" font-family="JetBrains Mono,monospace">1 : 7 =</text>`;
+    const ds='0,'+dg.slice(0,Math.min(k,6))+(done?'142857…':'');h+=`<text x="300" y="115" font-size="${done?20:26}" font-weight="800" fill="${done?'#ff9ab9':'#a78bfa'}" font-family="JetBrains Mono,monospace">${ds}</text>`;
+    if(k<7)h+=`<text x="300" y="160" font-size="16" fill="#aa9fd8">số dư hiện tại: <tspan font-weight="800" fill="#fbbf24">${seq[Math.min(k,6)]}</tspan></text>`;
+    $('heroSvg').innerHTML=h;$('heroCap').innerHTML=done?'Số dư 1 quay lại → các chữ số lặp mãi: <span style="color:#ff9ab9">1/7 = 0,(142857)</span>':'Chia 1 cho 7: mỗi bước sinh ra một số dư mới…'}
+  function step(){if(!$('v-hub').hidden){k++;if(k>6){draw();k=-1;setTimeout(step,3600);return}}draw();setTimeout(step,k===0?600:950)}
+  k=0;draw();setTimeout(step,900)}
+
+/* ---------- R1a MÁY CHIA ---------- */
+(function(){const tried=new Set();
+  function run(a,b){if(isNaN(a)||isNaN(b)||b===0){msg('dv-f','Mẫu số phải là số nguyên khác 0 nhé!','warn');return}
+    if(Math.abs(b)>200||Math.abs(a)>9999){msg('dv-f','Em thử với số nhỏ hơn (mẫu số không quá 200) để dễ quan sát nhé.','warn');return}
+    const d=decimal(a,b),box=$('dv-steps');box.innerHTML='';const shown=d.steps.slice(0,24);
+    shown.forEach((s,k)=>{const el=document.createElement('div');el.className='step'+(d.cyc&&s.r===d.repR&&k>=d.pre.length?' rep':'');el.style.animationDelay=(k*.12)+'s';el.textContent=`Dư ${s.r} → ${s.r*10} : ${Math.abs(b)} = ${s.q} (dư ${s.nr})`;box.appendChild(el)});
+    if(d.steps.length>24)box.insertAdjacentHTML('beforeend','<div class="step dim">…</div>');
+    if(d.cyc){const el=document.createElement('div');el.className='step rep';el.style.animationDelay=(shown.length*.12)+'s';el.textContent=`↻ Số dư ${d.repR} xuất hiện lại → các chữ số lặp lại mãi!`;box.appendChild(el)}
+    else if(d.steps.length){const el=document.createElement('div');el.className='step';el.style.animationDelay=(shown.length*.12)+'s';el.textContent='✔ Số dư bằng 0 → phép chia dừng lại.';box.appendChild(el)}
+    else box.innerHTML='<div class="step">Phép chia hết, kết quả là số nguyên.</div>';
+    const B=Math.abs(b);if(B>40)$('dv-clock').innerHTML='<text x="130" y="130" text-anchor="middle" font-size="14" fill="#aa9fd8">Đồng hồ chỉ vẽ khi mẫu số ≤ 40</text>';
+    else{const seq=d.steps.map(s=>s.r);if(d.steps.length)seq.push(d.cyc?d.repR:0);$('dv-clock').innerHTML=clockSVG(seq,B,d.cyc?seq.indexOf(d.repR):-1)}
+    const g=gcd(a,b),rb=B/g,fc=factors(rb);
+    $('dv-res').innerHTML=`${pretty(a)}/${pretty(b)} = ${d.sign?'−':''}${d.int}${d.pre||d.cyc?','+d.pre:''}${d.cyc?'<span class="cyc">('+d.cyc+')</span>':''}`;
+    msg('dv-f',rb===1?'Phân số bằng một số nguyên.':`Rút gọn: mẫu số là ${rb}${fc.length>1?' = '+fc.join('·'):''}. `+(fc.every(p=>p===2||p===5)?'Mẫu chỉ có ước nguyên tố 2 và 5 → <b>số thập phân hữu hạn</b>.':`Mẫu có ước nguyên tố khác 2 và 5 → <b>số thập phân vô hạn tuần hoàn</b>, chu kì <b>${d.cyc}</b>.`),'info');
+    say(d.cyc?`Số dư ${d.repR} quay lại, vòng lặp khép kín! Chu kì là ${d.cyc}.`:'Số dư về 0, phép chia dừng lại: số thập phân hữu hạn.');sfx.tap();
+    tried.add(`${a/g}/${b/g}`);$('dv-tried').textContent='Em đã chia '+Math.min(tried.size,5)+'/5 phân số khác nhau.'+(tried.size>=5?' ⭐':'');if(tried.size>=5)award('div')}
+  $('dv-go').onclick=()=>run(parseInt($('dv-num').value),parseInt($('dv-den').value));
+  $$('#dv-quick button').forEach(b=>b.onclick=()=>{const[x,y]=b.dataset.f.split('/');$('dv-num').value=x;$('dv-den').value=y;run(+x,+y)})})();
+
+/* ---------- R1b SUY LUẬN ---------- */
+(function(){const T=[{q:'Khi chia một số tự nhiên cho 7, số dư có thể là những số nào?',o:['0, 1, 2, …, 6','0, 1, 2, …, 7','Bất kì số tự nhiên nào','1, 2, …, 9'],a:0,e:'Số dư luôn nhỏ hơn số chia, nên chỉ có thể là 0, 1, …, 6.'},
+  {q:'Trong khi chia, nếu gặp số dư bằng 0 thì sao?',o:['Phép chia dừng lại, được số thập phân hữu hạn','Các chữ số bắt đầu lặp lại','Phải chia tiếp mãi','Kết quả bằng 0'],a:0,e:'Số dư 0 nghĩa là đã chia hết: số thập phân hữu hạn.'},
+  {q:'Chia 1 cho 7 mà chưa gặp số dư 0. Có 6 số dư khác 0 có thể xuất hiện. Số dư thứ mấy chắc chắn trùng với một số dư trước đó?',o:['Số dư thứ 7','Số dư thứ 6','Số dư thứ 10','Không bao giờ trùng'],a:0,e:'6 số dư đầu có thể khác nhau, nhưng số dư thứ 7 bắt buộc trùng một số đã có. Từ đó các chữ số lặp lại: vô hạn tuần hoàn!'}];
+  let i=0,s=0,done=false;
+  function load(){done=false;$('wy-q').innerHTML=T[i].q;msg('wy-f','');prog('wy',i,T.length,s);$('wy-o').innerHTML=shuffle(T[i].o.map((t,k)=>k)).map(k=>`<button class="opt" data-k="${k}">${T[i].o[k]}</button>`).join('');
+    $$('#wy-o .opt').forEach(b=>b.onclick=()=>{if(done)return;done=true;const k=+b.dataset.k,ok=k===T[i].a;if(ok){s++;sfx.ok()}else sfx.bad();
+      $$('#wy-o .opt').forEach(x=>{const j=+x.dataset.k;if(j===T[i].a)x.classList.add('right');else if(x===b)x.classList.add('wrong')});msg('wy-f',(ok?'✅ ':'💭 ')+T[i].e,ok?'ok':'warn');prog('wy',i+1,T.length,s)})}
+  $('wy-nx').onclick=()=>{if(!done){msg('wy-f','Em chọn một đáp án trước nhé!','info');return}
+    if(i<T.length-1){i++;load()}else{const p=s>=2;msg('wy-f',p?'🎉 Suy luận sắc bén! Em đúng '+s+'/3 câu.':'Em đúng '+s+'/3 câu. Cần 2/3, thử lại nhé!',p?'ok':'warn');if(p)award('why');else{i=0;s=0;setTimeout(load,1800)}}};
+  load()})();
+
+/* ---------- R2 BĂNG CHUYỀN ---------- */
+(function(){const T=['3/8','2/3','7/20','5/6','9/12','4/15','11/25','13/30','6/75','7/14'];let i=0,s=0,ans=true,run=false,tm=0;
+  const isHH=f=>{const[x,y]=f.split('/').map(Number),g=gcd(x,y);return factors(y/g).every(p=>p===2||p===5)};
+  function stop(){clearTimeout(tm);run=false;const it=$('bl-item');it.style.left=getComputedStyle(it).left;it.style.transition='none';$('bl-belt').classList.add('stop');$('bl-lamp').textContent='● TẮT';$('bl-go').hidden=false}
+  STOP.push(()=>{if(run){stop();$('bl-go').textContent='▶ Chạy lại từ đầu'}});
+  function next(){if(i>=T.length){fin();return}ans=false;const it=$('bl-item'),D=Math.max(5,9-i*.45);it.innerHTML=F(T[i]);it.className='item';it.style.transition='none';it.style.left='-140px';void it.offsetWidth;
+    it.style.transition=`left ${D}s linear`;it.style.left='calc(100% + 10px)';prog('bl',i,T.length,s);msg('bl-f','');clearTimeout(tm);tm=setTimeout(()=>answer(null),D*1000)}
+  function answer(c){if(ans||!run)return;ans=true;clearTimeout(tm);const it=$('bl-item');it.style.left=getComputedStyle(it).left;it.style.transition='none';
+    const f=T[i],hh=isHH(f),ok=c!==null&&(c==='hh')===hh;it.classList.add(ok?'ok':'bad');if(ok){s++;sfx.ok()}else sfx.bad();
+    const[x,y]=f.split('/').map(Number),g=gcd(x,y),rb=y/g,fc=factors(rb);
+    msg('bl-f',(c===null?'⏰ Rơi mất rồi! ':ok?'✅ Đúng thùng! ':'💭 Nhầm thùng! ')+`${f}${g>1?' = '+(x/g)+'/'+rb:''}; mẫu ${rb}${fc.length>1?' = '+fc.join('·'):''} ${hh?'chỉ có ước 2 và 5':'có ước nguyên tố khác 2 và 5'} → ${f} = ${fmtD(decimal(x,y))}`,ok?'ok':'warn');
+    i++;prog('bl',i,T.length,s);tm=setTimeout(next,ok?2300:3900)}
+  function fin(){stop();const p=s>=8;msg('bl-f',p?'🎉 Em phân loại đúng '+s+'/10 phân số!':'Em đúng '+s+'/10. Cần 8/10 để nhận huy hiệu, chạy lại nhé!',p?'ok':'warn');if(p)award('belt');$('bl-go').textContent='↻ Chạy lại'}
+  $('bl-go').onclick=()=>{i=0;s=0;run=true;$('bl-go').hidden=true;$('bl-belt').classList.remove('stop');$('bl-lamp').textContent='● ĐANG CHẠY';sfx.tap();next()};
+  $('bl-hh').onclick=()=>answer('hh');$('bl-vh').onclick=()=>answer('vh');
+  window.__bl={get cur(){return T[i]},get ans(){return ans},isHH};prog('bl',0,T.length,0)})();
+
+/* ---------- R3 KÉT SẮT ---------- */
+(function(){const T=['1/3','2/11','1/6','5/12','3/22','1/7'];let i=0,s=0,tries=0,ok=false;
+  const ex=(p,c)=>{let t=p;while(t.length<40)t+=c||'0';return t.slice(0,40)};
+  function load(){tries=0;ok=false;$('sf-q').innerHTML=F(T[i]);$('sf-pre').value='';$('sf-cyc').value='';$('sf-safe').className='safe';$('sf-lock').textContent='🔒';$('sf-no').textContent=i+1;$('sf-code').textContent='';msg('sf-f','');prog('sf',i,T.length,s)}
+  $('sf-ok').onclick=()=>{if(ok)return;const[x,y]=T[i].split('/').map(Number),d=decimal(x,y),pre=$('sf-pre').value.trim(),cyc=$('sf-cyc').value.trim();
+    if(!cyc){msg('sf-f','Em nhập chu kì vào ô trong ngoặc nhé!','info');return}
+    if(!/^\d*$/.test(pre)||!/^\d+$/.test(cyc)){msg('sf-f','Mật mã chỉ gồm các chữ số 0–9 thôi nhé.','info');return}
+    tries++;const sf=$('sf-safe');sf.classList.remove('spin');void sf.offsetWidth;sf.classList.add('spin');
+    if(pre===d.pre&&cyc===d.cyc){ok=true;if(tries===1)s++;sfx.ok();confetti(50);setTimeout(()=>{sf.classList.add('open');$('sf-lock').textContent='🔓'},500);$('sf-code').textContent=fmtD(d);
+      msg('sf-f',`✅ Mật mã đúng! ${T[i]} = ${fmtD(d)}${d.pre?': phần không lặp là '+d.pre+', chu kì là '+d.cyc:': chu kì '+d.cyc+' bắt đầu ngay sau dấu phẩy'}.`,'ok');say('Két mở rồi! Em đúng là thám tử tài ba 💎');prog('sf',i+1,T.length,s)}
+    else{sfx.bad();const same=ex(pre,cyc)===ex(d.pre,d.cyc);
+      msg('sf-f',same?'Giá trị thì đúng rồi, nhưng chưa viết <b>gọn nhất</b>: chu kì phải là nhóm chữ số ngắn nhất lặp lại và bắt đầu càng sớm càng tốt. Sửa lại nhé!':
+        `Két chưa mở. 💡 Chia ${x} cho ${y} (hoặc dùng Máy chia ở phòng 01), xem chữ số nào bắt đầu lặp lại.`+(tries>=2?` Gợi ý: ${T[i]} = 0,${ex(d.pre,d.cyc).slice(0,8)}…`:''),'warn');
+      say(same?'Gần đúng rồi! Viết chu kì thật gọn nhé.':'Nhìn các chữ số thương, tìm nhóm lặp lại ngắn nhất.')}};
+  $('sf-nx').onclick=()=>{if(!ok&&tries===0){msg('sf-f','Em thử mở két trước đã nhé!','info');return}
+    if(i<T.length-1){i++;load()}else{const p=s>=4;msg('sf-f',p?'🎉 Em mở đúng ngay '+s+'/6 két!':'Em mở đúng ngay '+s+'/6 két. Cần 4/6 để nhận huy hiệu, làm lại nhé!',p?'ok':'warn');if(p)award('safe');else{i=0;s=0;setTimeout(load,1800)}}};
+  ['sf-pre','sf-cyc'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')$('sf-ok').click()}));
+  window.__sf={get ans(){const[x,y]=T[i].split('/').map(Number),d=decimal(x,y);return[d.pre,d.cyc]}};load()})();
+
+/* ---------- R4a LÀM TRÒN TRÊN TRỤC SỐ ---------- */
+(function(){const T=[{x:2.718,t:'2,718',dec:2,ph:'hàng phần trăm'},{x:1/3,t:'0,(3)',dec:1,ph:'hàng phần mười'},{x:5/3,t:'1,(6)',dec:1,ph:'hàng phần mười'},
+  {x:3.14159,t:'3,14159…',dec:2,ph:'hàng phần trăm'},{x:1/6,t:'0,1(6)',dec:2,ph:'hàng phần trăm'},{x:12.5,t:'12,5',dec:0,ph:'hàng đơn vị'}];
+  let i=0,s=0,done=false,lo=0,hi=0,ans=0;
+  function load(){done=false;const it=T[i],sc=Math.pow(10,it.dec),li=Math.floor(it.x*sc+1e-9);lo=li/sc;hi=(li+1)/sc;const dig=Math.floor((it.x*sc-li)*10+1e-9);ans=dig>=5?hi:lo;
+    $('rd-q').innerHTML=`Làm tròn số <span style="color:var(--acc2)">${it.t}</span> đến ${it.ph}`;$('rd-a').textContent=num(lo,it.dec);$('rd-b').textContent=num(hi,it.dec);
+    $('rd-a').className=$('rd-b').className='btn line';draw(false);msg('rd-f','');prog('rd',i,T.length,s)}
+  function draw(show){const it=T[i],X0=80,X1=740,xp=v=>X0+(v-lo)/(hi-lo)*(X1-X0),px=xp(Math.min(Math.max(it.x,lo),hi));
+    let h=`<line x1="${X0-30}" y1="90" x2="${X1+30}" y2="90" stroke="#aa9fd8" stroke-width="3"/>`;
+    for(let k=0;k<=10;k++){const x=X0+k*(X1-X0)/10,mj=k===0||k===10,mid=k===5;h+=`<line x1="${x}" y1="${mj?70:mid?74:80}" x2="${x}" y2="${mj?110:mid?106:100}" stroke="${mj?'#f0ebff':mid?'#fbbf24':'#6d5bb8'}" stroke-width="${mj?4:mid?3:2}"/>`;
+      if(mid)h+=`<text x="${x}" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#fbbf24">điểm giữa</text>`}
+    h+=`<text x="${X0}" y="140" text-anchor="middle" font-size="24" font-weight="800" fill="#f0ebff">${num(lo,it.dec)}</text><text x="${X1}" y="140" text-anchor="middle" font-size="24" font-weight="800" fill="#f0ebff">${num(hi,it.dec)}</text>`;
+    h+=`<circle cx="${px}" cy="90" r="11" fill="#ff5d8f" stroke="#fff" stroke-width="3"/><text x="${px}" y="52" text-anchor="middle" font-size="22" font-weight="800" fill="#ff9ab9">${it.t}</text>`;
+    if(show){const xa=xp(ans);h+=`<path d="M${px} 66 Q ${(px+xa)/2} 18 ${xa} 66" fill="none" stroke="#22c55e" stroke-width="3" marker-end="url(#ar)"/><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#22c55e"/></marker></defs>`}
+    $('rd-svg').innerHTML=h}
+  function pick(v,btn){if(done)return;done=true;const it=T[i],ok=Math.abs(v-ans)<1e-9,sc=Math.pow(10,it.dec),dig=Math.floor((it.x*sc-Math.floor(it.x*sc+1e-9))*10+1e-9);if(ok){s++;sfx.ok()}else sfx.bad();
+    (Math.abs(ans-lo)<1e-9?$('rd-a'):$('rd-b')).className='btn line opt right';if(!ok)btn.className='btn line opt wrong';draw(true);
+    msg('rd-f',(ok?'✅ Đúng! ':'💭 Chưa đúng. ')+`Chữ số đầu tiên bị bỏ đi là <b>${dig}</b> ${dig>=5?'≥ 5 nên cộng thêm 1 vào chữ số cuối cùng giữ lại':'&lt; 5 nên giữ nguyên'}: ${it.t} ≈ <b>${num(ans,it.dec)}</b>. Trên trục số, điểm hồng nằm ${dig>=5?'từ điểm giữa trở về phía':'gần'} ${num(ans,it.dec)} hơn.`,ok?'ok':'warn');prog('rd',i+1,T.length,s)}
+  $('rd-a').onclick=e=>pick(lo,e.currentTarget);$('rd-b').onclick=e=>pick(hi,e.currentTarget);
+  $('rd-nx').onclick=()=>{if(!done){msg('rd-f','Em chọn một kết quả trước nhé!','info');return}
+    if(i<T.length-1){i++;load()}else{const p=s>=5;msg('rd-f',p?'🎉 Em làm tròn đúng '+s+'/6 câu!':'Em đúng '+s+'/6 câu. Cần 5/6 để nhận huy hiệu, làm lại nhé!',p?'ok':'warn');if(p)award('round');else{i=0;s=0;setTimeout(load,1800)}}};
+  window.__rd={get ans(){return ans},get lo(){return lo}};load()})();
+
+/* ---------- R4b ĐỘ CHÍNH XÁC ---------- */
+(function(){const PL=['hàng trăm','hàng chục','hàng đơn vị','hàng phần mười','hàng phần trăm'],UN={'hàng trăm':'100','hàng chục':'10','hàng đơn vị':'1','hàng phần mười':'0,1','hàng phần trăm':'0,01'};
+  const T=[{t:'3,14159…',d:'0,005',pl:'hàng phần trăm',o:['3,14','3,15','3,1','3,142'],w:'chữ số bỏ đi đầu tiên là 1 &lt; 5'},
+   {t:F('2/3')+' = 0,(6)',d:'0,05',pl:'hàng phần mười',o:['0,7','0,6','0,67','0,66'],w:'0,666…: chữ số bỏ đi đầu tiên là 6 ≥ 5'},
+   {t:'1 234 567',d:'50',pl:'hàng trăm',o:['1 234 600','1 234 500','1 234 570','1 235 000'],w:'chữ số bỏ đi đầu tiên là 6 ≥ 5'},
+   {t:F('5/11')+' = 0,(45)',d:'0,005',pl:'hàng phần trăm',o:['0,45','0,46','0,5','0,455'],w:'0,4545…: chữ số bỏ đi đầu tiên là 4 &lt; 5'},
+   {t:F('55/3')+' = 18,(3)',d:'0,5',pl:'hàng đơn vị',o:['18','19','18,3','20'],w:'18,333…: chữ số bỏ đi đầu tiên là 3 &lt; 5'}];
+  let i=0,s=0,st=0,first=true,done=false;
+  function load(){st=1;first=true;done=false;const it=T[i];$('pc-q').innerHTML=`Làm tròn số ${it.t} với độ chính xác <span style="color:var(--gold)">${it.d}</span>`;
+    $('pc-o1').innerHTML=PL.map(p=>`<button class="opt" data-p="${p}">${p}</button>`).join('');$('pc-s2').hidden=true;msg('pc-f','');prog('pc',i,T.length,s);
+    $$('#pc-o1 .opt').forEach(b=>b.onclick=()=>p1(b))}
+  function p1(b){if(st!==1)return;st=2;const it=T[i],ok=b.dataset.p===it.pl;if(!ok)first=false;ok?sfx.ok():sfx.bad();
+    $$('#pc-o1 .opt').forEach(x=>{if(x.dataset.p===it.pl)x.classList.add('right');else if(x===b)x.classList.add('wrong')});
+    msg('pc-f',(ok?'✅ ':'💭 ')+`Độ chính xác ${it.d} bằng một nửa của ${UN[it.pl]} (đơn vị của ${it.pl}), nên làm tròn đến <b>${it.pl}</b>.`,ok?'ok':'warn');
+    $('pc-s2').hidden=false;$('pc-o2').innerHTML=shuffle(it.o.map((t,k)=>k)).map(k=>`<button class="opt" data-k="${k}">${it.o[k]}</button>`).join('');$$('#pc-o2 .opt').forEach(x=>x.onclick=()=>p2(x))}
+  function p2(b){if(st!==2)return;st=3;done=true;const it=T[i],ok=+b.dataset.k===0;if(!ok)first=false;ok?sfx.ok():sfx.bad();if(first)s++;
+    $$('#pc-o2 .opt').forEach(x=>{if(+x.dataset.k===0)x.classList.add('right');else if(x===b)x.classList.add('wrong')});
+    msg('pc-f',(ok?'✅ Chính xác! ':'💭 Chưa đúng. ')+`Làm tròn đến ${it.pl}: ${it.w} → kết quả <b>${it.o[0]}</b>.`,ok?'ok':'warn');prog('pc',i+1,T.length,s)}
+  $('pc-nx').onclick=()=>{if(!done){msg('pc-f','Em làm xong cả hai bước trước nhé!','info');return}
+    if(i<T.length-1){i++;load()}else{const p=s>=4;msg('pc-f',p?'🎉 Em đúng trọn vẹn '+s+'/5 câu!':'Em đúng trọn vẹn '+s+'/5 câu. Cần 4/5 để nhận huy hiệu, làm lại nhé!',p?'ok':'warn');if(p)award('prec');else{i=0;s=0;setTimeout(load,1800)}}};
+  window.__pc={get pl(){return T[i].pl}};load()})();
+
+/* ---------- R5 ĐỜI SỐNG ---------- */
+(function(){const T=[{e:'💵',q:'Mẹ đưa 100 000 đồng, chia đều cho 3 anh em. Mỗi người được khoảng bao nhiêu? (làm tròn đến hàng đơn vị)',a:100000,b:3,o:['33 333 đồng','33 334 đồng','33 330 đồng'],w:'chữ số bỏ đi đầu tiên là 3 &lt; 5 nên giữ nguyên'},
+  {e:'🎀',q:'Cắt 1 m ruy băng thành 6 đoạn bằng nhau. Mỗi đoạn dài khoảng bao nhiêu mét? (làm tròn đến hàng phần trăm)',a:1,b:6,o:['0,17 m','0,16 m','0,2 m'],w:'0,1666…: chữ số bỏ đi đầu tiên là 6 ≥ 5 nên cộng 1'},
+  {e:'🍬',q:'Chia đều 2 kg kẹo vào 3 túi. Mỗi túi khoảng bao nhiêu ki-lô-gam? (làm tròn đến hàng phần mười)',a:2,b:3,o:['0,7 kg','0,6 kg','0,67 kg'],w:'0,666…: chữ số bỏ đi đầu tiên là 6 ≥ 5 nên cộng 1'},
+  {e:'🏃',q:'Bạn An chạy 10 km gồm 7 vòng đều nhau. Mỗi vòng dài khoảng bao nhiêu ki-lô-mét? (làm tròn đến hàng phần trăm)',a:10,b:7,o:['1,43 km','1,42 km','1,4 km'],w:'1,428…: chữ số bỏ đi đầu tiên là 8 ≥ 5 nên cộng 1'},
+  {e:'🍕',q:'Chia đều 4 cái bánh cho 9 bạn. Mỗi bạn được khoảng bao nhiêu cái bánh? (làm tròn đến hàng phần mười)',a:4,b:9,o:['0,4 cái','0,5 cái','0,44 cái'],w:'0,444…: chữ số bỏ đi đầu tiên là 4 &lt; 5 nên giữ nguyên'}];
+  let i=0,s=0,done=false;
+  function load(){done=false;const it=T[i];$('lf-e').textContent=it.e;$('lf-q').innerHTML=it.q;msg('lf-f','');prog('lf',i,T.length,s);
+    $('lf-o').innerHTML=shuffle(it.o.map((t,k)=>k)).map(k=>`<button class="opt" data-k="${k}">${it.o[k]}</button>`).join('');$$('#lf-o .opt').forEach(b=>b.onclick=()=>pick(b))}
+  function pick(b){if(done)return;done=true;const it=T[i],ok=+b.dataset.k===0;if(ok){s++;sfx.ok()}else sfx.bad();
+    $$('#lf-o .opt').forEach(x=>{if(+x.dataset.k===0)x.classList.add('right');else if(x===b)x.classList.add('wrong')});
+    msg('lf-f',(ok?'✅ Phá án thành công! ':'💭 Chưa đúng. ')+`${it.a.toLocaleString('vi-VN')} : ${it.b} = ${fmtD(decimal(it.a,it.b))}; ${it.w} → ≈ <b>${it.o[0]}</b>.`,ok?'ok':'warn');
+    say(ok?'Vụ án đã được giải quyết! 🕵️':'Chia ra số thập phân trước, rồi mới làm tròn nhé.');prog('lf',i+1,T.length,s)}
+  $('lf-nx').onclick=()=>{if(!done){msg('lf-f','Em chọn đáp án trước nhé!','info');return}
+    if(i<T.length-1){i++;load()}else{const p=s>=4;msg('lf-f',p?'🎉 Em phá '+s+'/5 vụ án!':'Em phá được '+s+'/5 vụ. Cần 4/5 để nhận huy hiệu, làm lại nhé!',p?'ok':'warn');if(p)award('life');else{i=0;s=0;setTimeout(load,1800)}}};
+  load()})();
+
+boot();
+</script>
+<!-- ===== TRỢ GIẢNG AI – THÁM TỬ SỐ THẬP PHÂN (dán ngay TRƯỚC thẻ </body> trong index.html) ===== -->
+<style>
+#tgai-btn{position:fixed;right:18px;bottom:18px;z-index:99999;display:flex;align-items:center;gap:8px;padding:12px 18px;border:none;border-radius:999px;background:linear-gradient(135deg,#2dd4bf,#0ea5e9);color:#04221f;font:700 15px/1 'Be Vietnam Pro',system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(45,212,191,.35)}
+#tgai-btn:hover{transform:translateY(-2px)}
+#tgai-box{position:fixed;right:18px;bottom:78px;z-index:99999;width:370px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 110px);display:none;flex-direction:column;background:#0b1f24;border:1px solid #1f4a4f;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.5);font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#e6fffb;overflow:hidden}
+#tgai-box.open{display:flex}
+#tgai-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#0f2c32;border-bottom:1px solid #1f4a4f}
+#tgai-head b{font-size:15px}
+#tgai-head small{display:block;font-size:12px;color:#8fbfba;font-weight:400}
+#tgai-x{background:none;border:none;color:#8fbfba;font-size:22px;cursor:pointer}
+#tgai-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.tgai-b{padding:9px 12px;border-radius:14px;font-size:14px;line-height:1.5;max-width:88%;white-space:pre-wrap}
+.tgai-a{align-self:flex-start;background:#133a40;border-bottom-left-radius:4px}
+.tgai-u{align-self:flex-end;background:#2dd4bf;color:#04221f;border-bottom-right-radius:4px}
+#tgai-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
+.tgai-c{border:1px solid #1f4a4f;background:transparent;color:#bdf5ec;border-radius:999px;padding:5px 10px;font:13px 'Be Vietnam Pro',system-ui,sans-serif;cursor:pointer}
+#tgai-f{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #1f4a4f}
+#tgai-q{flex:1;min-width:0;background:#0f2c32;border:1px solid #1f4a4f;border-radius:12px;padding:10px;color:#e6fffb;font:15px 'Be Vietnam Pro',system-ui,sans-serif}
+#tgai-send{border:none;border-radius:12px;padding:0 14px;background:#2dd4bf;color:#04221f;font-weight:700;cursor:pointer}
+#tgai-rule{font-size:11.5px;color:#8fbfba;padding:0 12px 10px}
+@media(max-width:600px){#tgai-btn .tgai-t{display:none}#tgai-btn{padding:14px;font-size:22px}}
+/* Khi trang được nhúng (Google Site): nút thành thanh ở đầu trang, khung chat mở ngay bên dưới */
+.tgai-embed #tgai-btn{position:relative;right:auto;bottom:auto;width:calc(100% - 24px);margin:10px 12px 0;justify-content:center;padding:12px 18px;font-size:15px}
+.tgai-embed #tgai-btn .tgai-t{display:inline}
+.tgai-embed #tgai-box{position:absolute;top:66px;bottom:auto;right:12px;height:500px;max-height:none}
+</style>
+
+<button id="tgai-btn" aria-label="Mở trợ giảng AI">🤖<span class="tgai-t"> Hỏi trợ giảng AI</span></button>
+<div id="tgai-box" role="dialog" aria-label="Trợ giảng AI">
+  <div id="tgai-head"><div><b>🤖 Trợ giảng AI</b><small>Toán 7 · Bài 5: Làm quen với số thập phân vô hạn tuần hoàn</small></div><button id="tgai-x" aria-label="Đóng">×</button></div>
+  <div id="tgai-log"><div class="tgai-b tgai-a">Chào em! Mình là trợ giảng AI của Thám tử số thập phân. Em bí ở đâu cứ hỏi, mình sẽ gợi ý để em tự tìm ra đáp án nhé 😊</div></div>
+  <div id="tgai-chips">
+    <button class="tgai-c">Chu kì là gì?</button>
+    <button class="tgai-c">Làm tròn với độ chính xác 0,05 là sao?</button>
+    <button class="tgai-c">Gợi ý cho câu em đang làm</button>
+  </div>
+  <div id="tgai-f"><input id="tgai-q" maxlength="300" placeholder="Nhập câu hỏi của em…"><button id="tgai-send">Gửi</button></div>
+  <div id="tgai-rule">🛡️ Hỏi để hiểu, không hỏi để chép · Không ghi thông tin cá nhân · AI có thể sai, hãy kiểm tra với SGK và thầy cô.</div>
+</div>
+
+<script>
+(function(){
+  // Đang nằm trong khung nhúng (Google Site)? -> đưa nút lên đầu trang để luôn nhìn thấy
+  var inFrame=false;try{inFrame=window.self!==window.top}catch(e){inFrame=true}
+  if(inFrame){document.documentElement.classList.add('tgai-embed');var bt=document.getElementById('tgai-btn');document.body.insertBefore(bt,document.body.firstChild);document.body.style.position='relative';document.body.appendChild(document.getElementById('tgai-box'))}
+  var box=document.getElementById('tgai-box'),log=document.getElementById('tgai-log'),inp=document.getElementById('tgai-q'),hist=[],busy=false;
+  document.getElementById('tgai-btn').onclick=function(){box.classList.toggle('open');if(box.classList.contains('open'))inp.focus()};
+  document.getElementById('tgai-x').onclick=function(){box.classList.remove('open')};
+  function add(t,who){var d=document.createElement('div');d.className='tgai-b '+who;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+  function where(){
+    var v=[].slice.call(document.querySelectorAll('.view')).find(function(e){return !e.hidden}),t=v?v.innerText.replace(/\s+/g,' ').slice(0,320):'';
+    return 'Học sinh đang dùng học liệu "Thám tử số thập phân" (Toán 7, Bài 5: Làm quen với số thập phân vô hạn tuần hoàn). Phần đang xem: "'+t+'". KHÔNG nói ra đáp án của câu đang làm, chỉ gợi ý cách nghĩ.';
+  }
+  async function ask(text){
+    var q=(text||inp.value).trim(); if(!q||busy)return; inp.value=''; busy=true;
+    add(q,'tgai-u'); var w=add('Trợ giảng đang suy nghĩ…','tgai-a');
+    try{
+      var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,context:where(),history:hist.slice(-6)})});
+      var j=await r.json(); if(!r.ok||!j.reply)throw 0;
+      w.textContent=j.reply; hist.push({role:'user',text:q},{role:'ai',text:j.reply});
+    }catch(e){w.textContent='Trợ giảng AI đang tạm nghỉ. Em thử lại sau hoặc hỏi thầy cô nhé!'}
+    busy=false;
+  }
+  document.getElementById('tgai-send').onclick=function(){ask()};
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')ask()});
+  document.querySelectorAll('.tgai-c').forEach(function(b){b.onclick=function(){ask(b.textContent)}});
+})();
+</script>
+<!-- ===== HẾT ĐOẠN TRỢ GIẢNG AI ===== -->
+
+<!-- Vercel Web Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
